@@ -1,0 +1,94 @@
+<h1>Using GraphQL With A Drupal JSON API</h1>
+<p><strong>Story:</strong> As a developer, I would like to understand the usefulness of utilizing a GraphQL server when retrieving data from a Drupal JSON API source. I would like to understand how to set up the proper types and schema definitions to display this data. Using this GraphQL server, illustrates the benefits of consolidating multiple API data points within the type definitions and/or schemas. Using this React application, show how to retrieve the designated queries from the GraphQL server.</p>
+
+<mat-divider></mat-divider>
+
+<h2>Retrieving information from graphql to display</h2>
+
+<p>The following component illustrates the retrieval of data from the GraphQL endpoint which can be tested at http://localhost:8082/graphiql. The schemas have been constructed within the GraphQL server to accommodate queries in order to retrieve information which can be cached and stored to minimize roundtrips to the Drupal API endpoint(s).</p>
+
+<mat-card *ngFor="let pokemon of pokemons" class="pokemon">
+  <mat-card-title>{{ pokemon.title }}</mat-card-title>
+  <mat-grid-list cols="3">
+    <mat-grid-tile>
+      <h3>Images</h3>
+      <img [src]="pokemon.front_shiny_sprite" />
+      <img [src]="pokemon.back_shiny_sprite" />
+      <h3>Base stats</h3>
+      <div class="stat-groupings">
+        <div ng-class="{
+          impressive: pokemon.hp > 75,
+          average: pokemon.hp > 45 && pokemon.hp < 74
+        }">
+          <span>HP</span>
+          <span>{{pokemon.hp}}</span>
+        </div>
+        <div ng-class="{
+          impressive: pokemon.attack > 75,
+          average: pokemon.attack > 45 && pokemon.attack < 74
+        }">
+          <span>Attack</span>
+          <span>{{pokemon.attack}}</span>
+        </div>
+        <div ng-class="{
+          impressive: pokemon.defense > 75,
+          average: pokemon.defense > 45 && pokemon.defense < 74
+        }">
+          <span>Defense</span>
+          <span>{{pokemon.defense}}</span>
+        </div>
+        <div ng-class="{
+          impressive: pokemon.special_attack > 75,
+          average: pokemon.special_attack > 45 && pokemon.special_attack < 74
+        }">
+          <span>Special Attack</span>
+          <span>{{pokemon.special_attack}}</span>
+        </div>
+        <div ng-class="{
+          impressive: pokemon.special_defense > 75,
+          average: pokemon.special_defense > 45 && pokemon.special_defense < 74
+        }">
+          <span>Special Defense</span>
+          <span>{{pokemon.special_defense}}</span>
+        </div>
+        <div ng-class="{
+          impressive: pokemon.speed > 75,
+          average: pokemon.speed > 45 && pokemon.speed < 74
+        }">
+          <span>Speed</span>
+          <span>{{pokemon.speed}}</span>
+        </div>
+        <div class="total">
+          <span>Total</span>
+          <span>{{pokemon.speed + pokemon.special_attack + pokemon.special_defense + pokemon.attack + pokemon.defense + pokemon.hp}}</span>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <h3>Title</h3>
+      <p>{{ pokemon.title }}</p>
+      <h3>Pokemon ID</h3>
+      <p>{{ pokemon.pokemon_id }}</p>
+      <div>
+        <h3>Abilities</h3>
+        <div class="ability" *ngFor="let ability of pokemon.abilities">
+          <p>{{ ability.name }}</p>
+          <div [innerHTML]="ability.description"></div>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <h3>Height</h3>
+      <p>{{ pokemon.height_pokemon }}</p>
+      <h3>Weight</h3>
+      <p>{{ pokemon.weight_pokemon }}</p>
+      <div>
+        <h3>Types</h3>
+        <div class="ability" *ngFor="let type of pokemon.ref_types">
+          <p>{{ type.name }}</p>
+          <div [innerHTML]="type.description"></div>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>

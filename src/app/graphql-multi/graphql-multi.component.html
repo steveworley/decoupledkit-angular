@@ -1,0 +1,21 @@
+<h1>Using GraphQL To Query A Data From Both A Headless Drupal Source And External Non-Drupal API.</h1>
+<p><strong>Story</strong>: As a developer, I would like to understand the usefulness of utilizing a GraphQL server combine data from multiple API endpoints. I would like to understand how to setup the proper types and schema definitions to display this data. Using the GraphQL server we can demonstrate accessing information from different systems and exposing the data through a single interface for attached clients (this React application).</p>
+
+<h2>List of Marvel Characters</h2>
+
+<mat-card *ngFor="let character of characters">
+  <mat-card-title>{{character.name}}</mat-card-title>
+  <img mat-card-lg-image [src]="character.image" />
+  <mat-card-subtitle>Name</mat-card-subtitle>
+  <p>{{ character.name }}</p>
+  <mat-card-subtitle>Description</mat-card-subtitle>
+  <div [innerHTML]="character.description"></div>
+  <mat-card-subtitle>Appearances</mat-card-subtitle>
+  <mat-expansion-panel *ngFor="let comic of character.comics">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ comic.title }}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <img [src]="comic.image" />
+    <p>{{comic.description}}</p>
+  </mat-expansion-panel>
+</mat-card>

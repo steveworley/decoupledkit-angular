@@ -1,0 +1,40 @@
+<h1>Drupal CRUD component</h1>
+<p><strong>Story:</strong> As a developer, I want to understand common CRUD operations when interacting with Drupals JSON API endpoints from a Headless Lightning Drupal instance. I would like these tasks are broken out by core CRUD (Create, Read, Update, Delete) tasks for rich text and images fields. I do not want to replace Drupal strengths around content authoring, but rather seeks to understand workflows around interacting with API content.</p>
+
+<mat-card class="form--node-add">
+  <form>
+    <mat-card-title>Add another dog</mat-card-title>
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput name="title" [(ngModel)]="model.title" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Body</mat-label>
+      <textarea matInput name="body" [(ngModel)]="model.body"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>History and Background</mat-label>
+      <textarea matInput name="history_and_background" [(ngModel)]="model.history_and_background"></textarea>
+    </mat-form-field>
+    <div class="form-actions">
+      <button mat-raised-button color="accent" (click)="onAddClick()">Add</button>
+    </div>
+  </form>
+</mat-card>
+
+<mat-card *ngFor="let node of nodes">
+  <mat-card-title>{{node.title}}</mat-card-title>
+  <mat-card-content>
+    <mat-card-subtitle>NID</mat-card-subtitle>
+    <div class="field-content" [innerHTML]="node.nid"></div>
+    <mat-card-subtitle>Body</mat-card-subtitle>
+    <div class="field-content" [innerHTML]="node.body"></div>
+    <mat-card-subtitle>History and Background</mat-card-subtitle>
+    <div class="field-content" [innerHTML]="node.history_and_background"></div>
+    <mat-card-subtitle>Picture</mat-card-subtitle>
+    <div class="field-content"><img [src]="node.picture" /></div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="warn" (click)="onDeleteClick(node.id)">Delete</button>
+  </mat-card-actions>
+</mat-card>

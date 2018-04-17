@@ -1,0 +1,9 @@
+.pokemon h3 {
+  margin-bottom: 10px;
+  border: 1px solid #d3d3d3;
+  background: #efefef;
+  width: 100%;
+}
+.mat-grid-tile .mat-figure {
+  flex-direction: column;
+}
