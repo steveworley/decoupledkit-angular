@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { ApolloModule } from 'apollo-angular'
 import { HttpLinkModule } from 'apollo-angular-link-http'
 import { GraphqlService } from './models/graphql.service';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { GraphqlService } from './models/graphql.service';
     ApolloModule,
     HttpLinkModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    UserModule
   ],
   providers: [
     DrupalJsonApiService,
